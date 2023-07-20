@@ -64,7 +64,12 @@ resource "azurerm_linux_virtual_machine" "DB_VM_NJ" {
     sku       = "20_04-lts"
     version   = "latest"
 
-provisioner "remote-exec" {
+
+  }
+}
+
+resource "azurerm_linux_virtual_machine" "my_vm" {
+  provisioner "remote-exec" {
     inline = [
       "sudo apt-get update",
       "sudo apt-get install -y apache2",
@@ -72,8 +77,6 @@ provisioner "remote-exec" {
       "sudo systemctl enable apache2",
       "sudo systemctl start apache2"
     ]
+    }
   }
-
-  }
-}
 
