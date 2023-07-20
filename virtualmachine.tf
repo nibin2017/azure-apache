@@ -66,17 +66,20 @@ resource "azurerm_linux_virtual_machine" "DB_VM_NJ" {
 
 
   }
+
+   
+   os_profile {
+    computer_name  = "myvm"
+    admin_username = "adminuser"
+    custom_data    = base64encode(<<EOF
+    #!/bin/bash
+    sudo apt-get update
+    sudo apt-get install -y apache2
+    sudo service apache2 start
+    EOF
+    )
+  }
 }
 
-resource "azurerm_linux_virtual_machine" "DB_VM_NJ" {
-  provisioner "remote-exec" {
-    inline = [
-      "sudo apt-get update",
-      "sudo apt-get install -y apache2",
-      "sudo ufw allow 'Apache'",
-      "sudo systemctl enable apache2",
-      "sudo systemctl start apache2"
-    ]
-    }
-  }
+
 
