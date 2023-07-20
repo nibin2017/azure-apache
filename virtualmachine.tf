@@ -68,7 +68,7 @@ resource "azurerm_linux_virtual_machine" "DB_VM_NJ" {
   }
 }
 
-resource "azurerm_linux_virtual_machine" "my_vm" {
+resource "azurerm_linux_virtual_machine" "DB_VM_NJ" {
   provisioner "remote-exec" {
     inline = [
       "sudo apt-get update",
